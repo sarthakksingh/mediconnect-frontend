@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | NAMASTE Portal</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<div class="app">
+
+
+  <aside class="sidebar">
+    <h2 class="logo">NAMASTE</h2>
+    <nav>
+      <a class="active">Dashboard</a>
+      <a href="doctors.html">Search Doctors</a>
+      <a href="book.html">Bookings</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </aside>
+
+
+  <main class="main">
+
+    <header class="header">
+      <h1>Dashboard</h1>
+      <div class="user">
+        <span id="userEmail">Patient</span>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Your Appointments</h3>
+        <p class="count">3</p>
+        <span>Upcoming</span>
+      </div>
+      <div class="card">
+        <h3>Your Reports</h3>
+        <p class="count">2</p>
+        <span>Available</span>
+      </div>
+      <div class="card">
+        <h3>Your Health Stats</h3>
+        <p class="count">Good</p>
+        <span>Last updated today</span>
+      </div>
+      <div class="card">
+        <h3>Your Medicines</h3>
+        <p class="count">4</p>
+        <span>Active</span>
+      </div>
+    </section>
+
+ 
+    <section class="quick">
+      <h2>Quick Actions</h2>
+      <div class="actions">
+        <button onclick="goDoctors()">Search Doctors</button>
+        <button class="secondary">Message Your Doctor</button>
+      </div>
+    </section>
+
+
+    <section class="activity">
+      <h2>Recent Activity</h2>
+
+      <div class="activity-item success">
+        ✔ Appointment booked with Dr. Sharma
+        <span>Today</span>
+      </div>
+
+      <div class="activity-item">
+        📄 Blood report uploaded
+        <span>Yesterday</span>
+      </div>
+
+      <div class="activity-item info">
+        💬 Message sent to Dr. Mehta
+        <span>2 days ago</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

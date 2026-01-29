@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Appointment | NAMASTE Portal</title>
+  <link rel="stylesheet" href="css/book.css">
+</head>
+<body>
+
+<div class="app">
+
+  
+  <aside class="sidebar">
+    <h2 class="logo">NAMASTE</h2>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="doctors.html">Search Doctors</a>
+      <a class="active">Bookings</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <header class="header">
+      <h1>Book Appointment</h1>
+    </header>
+
+  
+    <section class="doctor-summary">
+      <h3>Dr. Rahul Sharma</h3>
+      <p>Cardiologist · 12+ years experience</p>
+      <div class="chips">
+        <span class="chip patients">👥 320 patients</span>
+        <span class="chip available">Available Today</span>
+        <span class="chip time">10:00 AM – 1:00 PM</span>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h3>Appointment Details</h3>
+
+      <div class="form-group">
+        <label>Select Date</label>
+        <input type="date" id="date">
+      </div>
+
+      <div class="form-group">
+        <label>Select Time Slot</label>
+        <select id="time">
+          <option>10:00 AM</option>
+          <option>10:30 AM</option>
+          <option>11:00 AM</option>
+          <option>11:30 AM</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Reason for Visit (Optional)</label>
+        <textarea placeholder="Brief description"></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="secondary" onclick="goBack()">Cancel</button>
+        <button onclick="bookAppointment()">Confirm Appointment</button>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script src="js/booking.js"></script>
+</body>
+</html>

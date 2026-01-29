@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f8;
+}
+
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+
+.sidebar {
+  width: 220px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px;
+}
+
+.logo {
+  color: #0d9488;
+  margin-bottom: 30px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 8px;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: #e6f7f5;
+  color: #0d9488;
+}
+
+
+.main {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header button {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.card .count {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+/* Quick actions */
+.quick {
+  margin-top: 30px;
+}
+
+.actions button {
+  background: #0d9488;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  margin-right: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.actions .secondary {
+  background: #6366f1;
+}
+
+/* Activity */
+.activity {
+  margin-top: 30px;
+}
+
+.activity-item {
+  background: white;
+  padding: 12px 15px;
+  margin-top: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.activity-item.success {
+  border-left: 4px solid #22c55e;
+}
+
+.activity-item.info {
+  border-left: 4px solid #6366f1;
+}

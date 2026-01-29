@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Doctors | NAMASTE Portal</title>
+  <link rel="stylesheet" href="css/doctor.css">
+</head>
+<body>
+
+<div class="app">
+
+  
+  <aside class="sidebar">
+    <h2 class="logo">NAMASTE</h2>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a class="active">Search Doctors</a>
+      <a href="book.html">Bookings</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </aside>
+
+
+  <main class="main">
+
+
+    <header class="header">
+      <h1>Search Doctors</h1>
+    </header>
+
+ 
+    <section class="search-bar">
+      <input type="text" placeholder="Search by doctor name, speciality, or keyword">
+      <select>
+        <option>All Specialities</option>
+        <option>Cardiology</option>
+        <option>Dermatology</option>
+      </select>
+      <button>Search</button>
+    </section>
+
+    <section class="results">
+      <h3>Search Results</h3>
+
+      <div class="doctor-card">
+        <div class="doctor-info">
+          <h4>Dr. Rahul Sharma</h4>
+          <p>Cardiologist with 12+ years of experience in heart care.</p>
+          <div class="chips">
+            <span class="chip patients">👥 320 patients</span>
+            <span class="chip available">Available</span>
+            <span class="chip time">10:00 AM – 1:00 PM</span>
+          </div>
+        </div>
+        <button class="arrow">›</button>
+      </div>
+
+      <div class="doctor-card">
+        <div class="doctor-info">
+          <h4>Dr. Neha Mehta</h4>
+          <p>Dermatologist specializing in skin and cosmetic treatments.</p>
+          <div class="chips">
+            <span class="chip patients">👥 210 patients</span>
+            <span class="chip unavailable">Unavailable</span>
+          </div>
+        </div>
+        <button class="arrow">›</button>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script src="js/doctors.js"></script>
+</body>
+</html>

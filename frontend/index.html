@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NAMASTE Portal</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="login-card">
+
+      <div class="logo">$</div>
+
+      <h2>NAMASTE Portal</h2>
+      <p class="subtitle">Secure access for clinicians and admins</p>
+
+      <label>Email or Username</label>
+      <input type="text" placeholder="you@example.com" id="email">
+
+      <label>Password</label>
+      <input type="password" placeholder="••••••••" id="password">
+
+      <div class="remember">
+        <input type="checkbox" id="remember">
+        <label for="remember">Remember me</label>
+      </div>
+
+      <button onclick="login()">Login</button>
+
+      <a href="#" class="forgot">Forgot password?</a>
+
+    </div>
+  </div>
+
+ <script src="js/config.js"></script>
+ <script src="js/auth.js"></script>
+</body>
+</html>

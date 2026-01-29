@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f8;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px;
+}
+
+.logo {
+  color: #0d9488;
+  margin-bottom: 30px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 8px;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: #e6f7f5;
+  color: #0d9488;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+/* Header */
+.header h1 {
+  margin: 0;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  flex: 1;
+}
+
+.search-bar button {
+  background: #0d9488;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Results */
+.results h3 {
+  margin-bottom: 10px;
+}
+
+.doctor-card {
+  background: white;
+  padding: 16px 18px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doctor-info h4 {
+  margin: 0;
+}
+
+.doctor-info p {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 6px 0 10px;
+}
+
+/* Chips */
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.patients {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.available {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.unavailable {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.time {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.arrow {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}

@@ -1,75 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Book Appointment | NAMASTE Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | MediConnect Portal</title>
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/book.css">
 </head>
 <body>
 
-<div class="app">
-
-  
   <aside class="sidebar">
-    <h2 class="logo">NAMASTE</h2>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="doctors.html">Search Doctors</a>
-      <a class="active">Bookings</a>
-      <a href="profile.html">Profile</a>
+    <div class="logo">
+      <div class="logo-icon">🏥</div>
+      <span class="logo-name">MediConnect</span>
+    </div>
+    <div class="nav-label">Menu</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a href="doctors.html"><span class="icon">🔍</span> Search Doctors</a>
+      <a href="bookings.html" class="active"><span class="icon">📅</span> My Bookings</a>
+      <a href="profile.html"><span class="icon">👤</span> Profile</a>
     </nav>
+    <div class="sidebar-footer">
+      <div class="user-name" id="userName"></div>
+      <div class="user-role" id="userRole"></div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
   </aside>
 
-  <main class="main">
+  <main class="main" style="max-width:860px">
+    <a href="doctors.html" class="back-link">← Back to doctors</a>
+    <h1 class="page-header-title" style="margin-bottom:24px">Book Appointment</h1>
 
-    <header class="header">
-      <h1>Book Appointment</h1>
-    </header>
-
-  
-    <section class="doctor-summary">
-      <h3>Dr. Rahul Sharma</h3>
-      <p>Cardiologist · 12+ years experience</p>
-      <div class="chips">
-        <span class="chip patients">👥 320 patients</span>
-        <span class="chip available">Available Today</span>
-        <span class="chip time">10:00 AM – 1:00 PM</span>
+    <div id="doctorBanner" class="doctor-banner">
+      <div class="skel" style="width:64px;height:64px;border-radius:16px;flex-shrink:0"></div>
+      <div style="flex:1">
+        <div class="skel" style="height:20px;width:50%;margin-bottom:10px"></div>
+        <div class="skel" style="height:14px;width:35%"></div>
       </div>
-    </section>
+    </div>
 
-    <section class="form-card">
-      <h3>Appointment Details</h3>
+    <div id="errorMsg"></div>
 
-      <div class="form-group">
-        <label>Select Date</label>
-        <input type="date" id="date">
+    <div class="form-card">
+      <div class="form-card-title">Appointment Details</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Select Date</label>
+          <input type="date" id="apptDate" onchange="updateSummary()">
+        </div>
+        <div class="form-group">
+          <label>Reason for Visit <span class="optional">(Optional)</span></label>
+          <input type="text" id="apptReason" placeholder="e.g. Regular checkup, chest pain...">
+        </div>
       </div>
 
       <div class="form-group">
         <label>Select Time Slot</label>
-        <select id="time">
-          <option>10:00 AM</option>
-          <option>10:30 AM</option>
-          <option>11:00 AM</option>
-          <option>11:30 AM</option>
-        </select>
+        <div class="slots-grid" id="slotsGrid">
+          <div class="skel" style="height:40px;border-radius:8px"></div>
+          <div class="skel" style="height:40px;border-radius:8px"></div>
+          <div class="skel" style="height:40px;border-radius:8px"></div>
+          <div class="skel" style="height:40px;border-radius:8px"></div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Reason for Visit (Optional)</label>
-        <textarea placeholder="Brief description"></textarea>
+      <div class="summary-box" id="summaryBox">
+        <div class="summary-title">Booking Summary</div>
+        <div class="summary-row"><span>Doctor</span><span id="sumDoctor">—</span></div>
+        <div class="summary-row"><span>Date</span><span id="sumDate">—</span></div>
+        <div class="summary-row"><span>Time</span><span id="sumTime">—</span></div>
+        <div class="summary-row"><span>Reason</span><span id="sumReason">Not specified</span></div>
       </div>
 
-      <div class="actions">
-        <button class="secondary" onclick="goBack()">Cancel</button>
-        <button onclick="bookAppointment()">Confirm Appointment</button>
+      <div class="form-actions">
+        <button class="btn btn-secondary" onclick="window.location.href='doctors.html'">Cancel</button>
+        <button class="btn btn-primary" id="confirmBtn" onclick="bookAppointment()">Confirm Appointment</button>
       </div>
-
-    </section>
-
+    </div>
   </main>
-</div>
 
-<script src="js/booking.js"></script>
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successOverlay">
+    <div class="modal">
+      <div class="modal-icon">🎉</div>
+      <h2>Appointment Booked!</h2>
+      <p>Your appointment has been confirmed. You'll receive a reminder the day before your visit.</p>
+      <button class="btn btn-primary" onclick="window.location.href='bookings.html'">View My Bookings</button>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/book.js"></script>
 </body>
 </html>

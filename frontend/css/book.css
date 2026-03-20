@@ -1,157 +1,59 @@
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
-body {
-  margin: 0;
-  background: #f4f6f8;
-}
-
-/* Layout */
-.app {
-  display: flex;
-  height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 220px;
-  background: #ffffff;
-  border-right: 1px solid #e5e7eb;
-  padding: 20px;
-}
-
-.logo {
-  color: #0d9488;
-  margin-bottom: 30px;
-}
-
-.sidebar nav a {
-  display: block;
-  padding: 10px;
-  margin-bottom: 8px;
-  color: #374151;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-.sidebar nav a.active,
-.sidebar nav a:hover {
-  background: #e6f7f5;
-  color: #0d9488;
-}
-
-/* Main */
-.main {
-  flex: 1;
-  padding: 25px;
-  overflow-y: auto;
-}
-
-/* Header */
-.header h1 {
-  margin: 0;
-}
-
-/* Doctor summary */
-.doctor-summary {
-  background: white;
-  padding: 18px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-.doctor-summary p {
-  color: #6b7280;
-  margin: 6px 0 10px;
-}
-
-/* Chips */
-.chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.chip {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 999px;
-}
-
-.patients {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-
-.available {
-  background: #dcfce7;
-  color: #15803d;
-}
-
-.time {
-  background: #ede9fe;
-  color: #6d28d9;
-}
-
-/* Form */
-.form-card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-.form-card h3 {
-  margin-top: 0;
-}
-
-.form-group {
-  margin-bottom: 16px;
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 6px;
-  color: #374151;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-}
-
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-/* Actions */
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.actions button {
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-.actions button:first-child {
-  background: #e5e7eb;
-}
-
-.actions button:last-child {
-  background: #0d9488;
+.doctor-banner {
+  background: linear-gradient(135deg, var(--teal) 0%, #0f766e 100%);
+  border-radius: 16px;
+  padding: 24px;
   color: white;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
 }
+
+.doctor-banner::after { content: '🏥'; position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: 0.1; }
+
+.banner-avatar { width: 64px; height: 64px; background: rgba(255,255,255,0.2); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; flex-shrink: 0; }
+.banner-name { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 4px; }
+.banner-spec { font-size: 14px; opacity: 0.85; margin-bottom: 12px; }
+.banner-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.banner-chip { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,0.2); color: white; font-weight: 500; }
+
+.form-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.form-card-title { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+
+.slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
+
+.slot-btn {
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.slot-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-light); }
+.slot-btn.selected { border-color: var(--teal); background: var(--teal); color: white; }
+
+.summary-box {
+  background: var(--teal-light);
+  border: 1.5px solid #99f6e4;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: none;
+}
+
+.summary-box.visible { display: block; }
+.summary-title { font-size: 12px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; color: var(--text); }
+.summary-row span:first-child { color: var(--muted); }
+.summary-row span:last-child { font-weight: 600; }
+
+.form-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }

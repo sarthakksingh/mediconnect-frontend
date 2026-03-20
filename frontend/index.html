@@ -2,38 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>NAMASTE Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediConnect Portal — Sign In</title>
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
-  <div class="container">
-    <div class="login-card">
-
-      <div class="logo">$</div>
-
-      <h2>NAMASTE Portal</h2>
-      <p class="subtitle">Secure access for clinicians and admins</p>
-
-      <label>Email or Username</label>
-      <input type="text" placeholder="you@example.com" id="email">
-
-      <label>Password</label>
-      <input type="password" placeholder="••••••••" id="password">
-
-      <div class="remember">
-        <input type="checkbox" id="remember">
-        <label for="remember">Remember me</label>
-      </div>
-
-      <button onclick="login()">Login</button>
-
-      <a href="#" class="forgot">Forgot password?</a>
-
+  <!-- ── Left Panel ── -->
+  <div class="left-panel">
+    <div class="brand">
+      <div class="brand-icon">🏥</div>
+      <span class="brand-name">MediConnect</span>
+    </div>
+    <h1 class="left-headline">Your health,<br><em>simplified.</em></h1>
+    <p class="left-sub">Book appointments, track reports, and stay connected with your doctors — all in one place.</p>
+    <div class="features">
+      <div class="feature"><div class="feature-dot"></div>Smart appointment booking with real-time availability</div>
+      <div class="feature"><div class="feature-dot"></div>Automated reminders so you never miss a visit</div>
+      <div class="feature"><div class="feature-dot"></div>Instant notifications when your reports are ready</div>
     </div>
   </div>
 
- <script src="js/config.js"></script>
- <script src="js/auth.js"></script>
+  <!-- ── Right Panel ── -->
+  <div class="right-panel">
+
+    <div class="tab-switcher">
+      <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+      <button class="tab-btn" onclick="switchTab('register')">Create Account</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-panel active" id="loginPanel">
+      <h2 class="form-title">Welcome back</h2>
+      <p class="form-sub">Sign in to your MediConnect account</p>
+      <div class="msg" id="loginMsg"></div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••">
+      </div>
+      <div class="remember-row">
+        <label><input type="checkbox"> Remember me</label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+      <button class="submit-btn" id="loginBtn" onclick="login()">Sign In</button>
+    </div>
+
+    <!-- Register Form -->
+    <div class="form-panel" id="registerPanel">
+      <h2 class="form-title">Create account</h2>
+      <p class="form-sub">Join MediConnect to manage your health</p>
+      <div class="msg" id="registerMsg"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="regName" placeholder="Sarthak Singh">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" id="regPhone" placeholder="+91 98765 43210">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Min. 8 characters">
+      </div>
+      <div class="form-group">
+        <label>I am a</label>
+        <select id="regRole">
+          <option value="PATIENT">Patient</option>
+          <option value="DOCTOR">Doctor</option>
+        </select>
+      </div>
+      <button class="submit-btn" id="registerBtn" onclick="register()">Create Account</button>
+    </div>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

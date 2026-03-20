@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | MediConnect Portal</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">🏥</div>
+      <span class="logo-name">MediConnect</span>
+    </div>
+    <div class="nav-label">Menu</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a href="doctors.html"><span class="icon">🔍</span> Search Doctors</a>
+      <a href="bookings.html"><span class="icon">📅</span> My Bookings</a>
+      <a href="profile.html" class="active"><span class="icon">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-name" id="userName"></div>
+      <div class="user-role" id="userRole"></div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <p class="page-header-sub">Manage your personal information</p>
+      <h1 class="page-header-title">My Profile</h1>
+    </div>
+
+    <div class="profile-grid">
+
+      <!-- Left: Profile card -->
+      <div>
+        <div class="profile-card">
+          <div class="profile-avatar" id="profileInitial">P</div>
+          <div class="profile-name" id="profileName">—</div>
+          <div class="profile-email" id="profileEmail">—</div>
+          <span class="chip chip-teal profile-role" id="profileRole">PATIENT</span>
+
+          <div class="profile-stats">
+            <div class="profile-stat">
+              <div class="profile-stat-val" id="totalAppts">—</div>
+              <div class="profile-stat-label">Total Visits</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-val" id="completedAppts">—</div>
+              <div class="profile-stat-label">Completed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Details -->
+      <div>
+        <div class="detail-card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div class="detail-title" style="margin-bottom:0;padding-bottom:0;border-bottom:none">Personal Information</div>
+            <button class="edit-btn">Edit Profile</button>
+          </div>
+          <div style="border-bottom:1px solid var(--border);margin:14px 0"></div>
+
+          <div class="detail-row">
+            <span class="detail-key">Full Name</span>
+            <span class="detail-val" id="detailName">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Email Address</span>
+            <span class="detail-val" id="detailEmail">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Phone</span>
+            <span class="detail-val">Not provided</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Role</span>
+            <span class="detail-val" id="detailRole">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Member Since</span>
+            <span class="detail-val">2024</span>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-title">Notification Preferences</div>
+          <div class="detail-row">
+            <span class="detail-key">Appointment Reminders</span>
+            <span class="chip chip-green">Enabled</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Report Notifications</span>
+            <span class="chip chip-green">Enabled</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Email Notifications</span>
+            <span class="chip chip-green">Enabled</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

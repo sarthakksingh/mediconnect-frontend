@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings | MediConnect Portal</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/bookings.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">🏥</div>
+      <span class="logo-name">MediConnect</span>
+    </div>
+    <div class="nav-label">Menu</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a href="doctors.html"><span class="icon">🔍</span> Search Doctors</a>
+      <a href="bookings.html" class="active"><span class="icon">📅</span> My Bookings</a>
+      <a href="profile.html"><span class="icon">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-name" id="userName"></div>
+      <div class="user-role" id="userRole"></div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
+      <div>
+        <p class="page-header-sub">Track and manage your visits</p>
+        <h1 class="page-header-title">My Bookings</h1>
+      </div>
+      <a href="doctors.html" class="btn btn-primary" style="text-decoration:none;margin-top:8px">+ New Appointment</a>
+    </div>
+
+    <!-- Summary chips -->
+    <div style="display:flex;gap:12px;margin-bottom:20px">
+      <div class="card" style="padding:14px 20px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">📅</span>
+        <div>
+          <div style="font-size:20px;font-weight:700;font-family:'DM Serif Display',serif;color:var(--teal)" id="totalCount">—</div>
+          <div style="font-size:12px;color:var(--muted)">Total Bookings</div>
+        </div>
+      </div>
+      <div class="card" style="padding:14px 20px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">✅</span>
+        <div>
+          <div style="font-size:20px;font-weight:700;font-family:'DM Serif Display',serif;color:var(--teal)" id="upcomingCount">—</div>
+          <div style="font-size:12px;color:var(--muted)">Upcoming</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterByStatus('all')">All</button>
+      <button class="filter-tab" onclick="filterByStatus('booked')">Booked</button>
+      <button class="filter-tab" onclick="filterByStatus('rescheduled')">Rescheduled</button>
+      <button class="filter-tab" onclick="filterByStatus('completed')">Completed</button>
+      <button class="filter-tab" onclick="filterByStatus('cancelled')">Cancelled</button>
+    </div>
+
+    <!-- Bookings list -->
+    <div class="bookings-list" id="bookingsList">
+      <div class="empty-state">
+        <div class="empty-icon">⏳</div>
+        <div class="empty-title">Loading your bookings...</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/bookings.js"></script>
+</body>
+</html>

@@ -1,77 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Search Doctors | NAMASTE Portal</title>
-  <link rel="stylesheet" href="css/doctor.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Doctors | MediConnect Portal</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/doctors.css">
 </head>
 <body>
 
-<div class="app">
-
-  
   <aside class="sidebar">
-    <h2 class="logo">NAMASTE</h2>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a class="active">Search Doctors</a>
-      <a href="book.html">Bookings</a>
-      <a href="profile.html">Profile</a>
+    <div class="logo">
+      <div class="logo-icon">🏥</div>
+      <span class="logo-name">MediConnect</span>
+    </div>
+    <div class="nav-label">Menu</div>
+    <nav class="nav">
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a href="doctors.html" class="active"><span class="icon">🔍</span> Search Doctors</a>
+      <a href="bookings.html"><span class="icon">📅</span> My Bookings</a>
+      <a href="profile.html"><span class="icon">👤</span> Profile</a>
     </nav>
+    <div class="sidebar-footer">
+      <div class="user-name" id="userName"></div>
+      <div class="user-role" id="userRole"></div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
   </aside>
 
-
   <main class="main">
+    <div class="page-header">
+      <p class="page-header-sub">Find the right specialist for you</p>
+      <h1 class="page-header-title">Search Doctors</h1>
+    </div>
 
-
-    <header class="header">
-      <h1>Search Doctors</h1>
-    </header>
-
- 
-    <section class="search-bar">
-      <input type="text" placeholder="Search by doctor name, speciality, or keyword">
-      <select>
-        <option>All Specialities</option>
-        <option>Cardiology</option>
-        <option>Dermatology</option>
+    <div class="search-section">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search by name or specialization..." oninput="filterDoctors()">
+      </div>
+      <select class="filter-select" id="specFilter" onchange="filterDoctors()">
+        <option value="">All Specializations</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Orthopedics">Orthopedics</option>
+        <option value="Neurology">Neurology</option>
+        <option value="Pediatrics">Pediatrics</option>
+        <option value="General">General Medicine</option>
       </select>
-      <button>Search</button>
-    </section>
+      <button class="btn btn-primary" onclick="filterDoctors()">Search</button>
+    </div>
 
-    <section class="results">
-      <h3>Search Results</h3>
+    <div class="results-header">
+      <span class="results-title">Available Doctors</span>
+      <span class="results-count" id="resultsCount">Loading...</span>
+    </div>
 
-      <div class="doctor-card">
-        <div class="doctor-info">
-          <h4>Dr. Rahul Sharma</h4>
-          <p>Cardiologist with 12+ years of experience in heart care.</p>
-          <div class="chips">
-            <span class="chip patients">👥 320 patients</span>
-            <span class="chip available">Available</span>
-            <span class="chip time">10:00 AM – 1:00 PM</span>
-          </div>
-        </div>
-        <button class="arrow">›</button>
+    <div class="doctors-grid" id="doctorsGrid">
+      <div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">⏳</div>
+        <div class="empty-title">Loading doctors...</div>
       </div>
-
-      <div class="doctor-card">
-        <div class="doctor-info">
-          <h4>Dr. Neha Mehta</h4>
-          <p>Dermatologist specializing in skin and cosmetic treatments.</p>
-          <div class="chips">
-            <span class="chip patients">👥 210 patients</span>
-            <span class="chip unavailable">Unavailable</span>
-          </div>
-        </div>
-        <button class="arrow">›</button>
-      </div>
-
-    </section>
-
+    </div>
   </main>
-</div>
 
-<script src="js/doctors.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/doctors.js"></script>
 </body>
 </html>

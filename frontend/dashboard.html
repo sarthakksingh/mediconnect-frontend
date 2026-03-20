@@ -1,91 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard | NAMASTE Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | MediConnect Portal</title>
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 
-<div class="app">
-
-
   <aside class="sidebar">
-    <h2 class="logo">NAMASTE</h2>
-    <nav>
-      <a class="active">Dashboard</a>
-      <a href="doctors.html">Search Doctors</a>
-      <a href="book.html">Bookings</a>
-      <a href="profile.html">Profile</a>
+    <div class="logo">
+      <div class="logo-icon">🏥</div>
+      <span class="logo-name">MediConnect</span>
+    </div>
+    <div class="nav-label">Menu</div>
+    <nav class="nav">
+      <a href="dashboard.html" class="active"><span class="icon">🏠</span> Dashboard</a>
+      <a href="doctors.html"><span class="icon">🔍</span> Search Doctors</a>
+      <a href="bookings.html"><span class="icon">📅</span> My Bookings</a>
+      <a href="profile.html"><span class="icon">👤</span> Profile</a>
     </nav>
+    <div class="sidebar-footer">
+      <div class="user-name" id="userName"></div>
+      <div class="user-role" id="userRole"></div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
   </aside>
 
-
   <main class="main">
-
-    <header class="header">
-      <h1>Dashboard</h1>
-      <div class="user">
-        <span id="userEmail">Patient</span>
-        <button onclick="logout()">Logout</button>
+    <div class="header-row">
+      <div>
+        <p class="header-greeting">Good morning 👋</p>
+        <h1 class="header-title" id="headerName"></h1>
       </div>
-    </header>
+      <div class="header-date" id="headerDate"></div>
+    </div>
 
-    <section class="cards">
+    <div class="cards-grid">
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon teal">📅</div>
+          <span class="chip chip-green">Upcoming</span>
+        </div>
+        <div class="stat-value" id="apptCount">—</div>
+        <div class="stat-label">Your Appointments</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon blue">📄</div>
+          <span class="chip chip-blue">Available</span>
+        </div>
+        <div class="stat-value">2</div>
+        <div class="stat-label">Your Reports</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon purple">💊</div>
+          <span class="chip chip-amber">Active</span>
+        </div>
+        <div class="stat-value">4</div>
+        <div class="stat-label">Your Medicines</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon amber">❤️</div>
+          <span class="chip chip-green">Good</span>
+        </div>
+        <div class="stat-value">98%</div>
+        <div class="stat-label">Health Score</div>
+      </div>
+    </div>
+
+    <div class="bottom-grid">
       <div class="card">
-        <h3>Your Appointments</h3>
-        <p class="count">3</p>
-        <span>Upcoming</span>
-      </div>
-      <div class="card">
-        <h3>Your Reports</h3>
-        <p class="count">2</p>
-        <span>Available</span>
-      </div>
-      <div class="card">
-        <h3>Your Health Stats</h3>
-        <p class="count">Good</p>
-        <span>Last updated today</span>
-      </div>
-      <div class="card">
-        <h3>Your Medicines</h3>
-        <p class="count">4</p>
-        <span>Active</span>
-      </div>
-    </section>
-
- 
-    <section class="quick">
-      <h2>Quick Actions</h2>
-      <div class="actions">
-        <button onclick="goDoctors()">Search Doctors</button>
-        <button class="secondary">Message Your Doctor</button>
-      </div>
-    </section>
-
-
-    <section class="activity">
-      <h2>Recent Activity</h2>
-
-      <div class="activity-item success">
-        ✔ Appointment booked with Dr. Sharma
-        <span>Today</span>
+        <div class="card-header">
+          <span class="card-title">Recent Activity</span>
+          <a href="bookings.html" class="card-link">View all →</a>
+        </div>
+        <div class="activity-list" id="activityList">
+          <div class="activity-item">
+            <div class="activity-dot green">✔</div>
+            <div class="activity-info">
+              <div class="activity-text">Loading your activity...</div>
+              <div class="activity-time">—</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="activity-item">
-        📄 Blood report uploaded
-        <span>Yesterday</span>
-      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Next Appointment</span>
+            <a href="bookings.html" class="card-link">All →</a>
+          </div>
+          <div class="next-appt-card">
+            <div class="next-appt-label">Upcoming</div>
+            <div class="next-appt-doctor" id="nextDoctor">No upcoming appointments</div>
+            <div class="next-appt-spec" id="nextSpec">Book one now</div>
+            <div class="next-appt-time" id="nextTime"></div>
+          </div>
+        </div>
 
-      <div class="activity-item info">
-        💬 Message sent to Dr. Mehta
-        <span>2 days ago</span>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Quick Actions</span></div>
+          <div class="quick-actions">
+            <a href="doctors.html" class="action-btn">
+              <div class="action-icon">🔍</div> Search Doctors <span class="action-arrow">›</span>
+            </a>
+            <a href="bookings.html" class="action-btn">
+              <div class="action-icon">📅</div> My Bookings <span class="action-arrow">›</span>
+            </a>
+            <button class="action-btn" onclick="alert('Coming soon!')">
+              <div class="action-icon">💬</div> Message Doctor <span class="action-arrow">›</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </section>
-
+    </div>
   </main>
-</div>
 
-<script src="js/dashboard.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>

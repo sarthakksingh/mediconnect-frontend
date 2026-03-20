@@ -1,8 +1,6 @@
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach((b, i) => {
-    b.classList.toggle('active',
-      (tab === 'login' && i === 0) || (tab === 'register' && i === 1)
-    );
+    b.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
   });
   document.getElementById('loginPanel').classList.toggle('active', tab === 'login');
   document.getElementById('registerPanel').classList.toggle('active', tab === 'register');
@@ -15,7 +13,7 @@ function showMsg(id, msg, type) {
 }
 
 async function login() {
-  const email    = document.getElementById('loginEmail').value.trim();
+  const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
 
   if (!email || !password) {
@@ -41,14 +39,14 @@ async function login() {
       return;
     }
 
-    localStorage.setItem('token',     data.access_token);
-    localStorage.setItem('user_id',   data.user_id);
+    localStorage.setItem('token', data.access_token);
+    localStorage.setItem('user_id', data.user_id);
     localStorage.setItem('user_name', data.name);
     localStorage.setItem('user_role', data.role);
 
     window.location.href = 'dashboard.html';
 
-  } catch {
+  } catch (e) {
     showMsg('loginMsg', 'Could not connect to server. Please try again.', 'error');
   } finally {
     btn.disabled = false;
@@ -57,11 +55,11 @@ async function login() {
 }
 
 async function register() {
-  const name     = document.getElementById('regName').value.trim();
-  const phone    = document.getElementById('regPhone').value.trim();
-  const email    = document.getElementById('regEmail').value.trim();
+  const name = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
-  const role     = document.getElementById('regRole').value;
+  const role = document.getElementById('regRole').value;
 
   if (!name || !email || !password) {
     showMsg('registerMsg', 'Please fill in all required fields.', 'error');
@@ -94,7 +92,7 @@ async function register() {
     showMsg('registerMsg', 'Account created! Please sign in.', 'success');
     setTimeout(() => switchTab('login'), 1500);
 
-  } catch {
+  } catch (e) {
     showMsg('registerMsg', 'Could not connect to server. Please try again.', 'error');
   } finally {
     btn.disabled = false;
@@ -102,9 +100,9 @@ async function register() {
   }
 }
 
-// Enter key support
 document.addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
   const active = document.querySelector('.form-panel.active').id;
-  active === 'loginPanel' ? login() : register();
+  if (active === 'loginPanel') login();
+  else register();
 });

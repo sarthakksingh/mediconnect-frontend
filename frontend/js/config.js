@@ -1,2 +1,2 @@
-// Change this to your Render URL when deploying
-const API_BASE = "http://localhost:8000";
+
+const API_BASE = "https://mediconnect-uzh5.onrender.com";

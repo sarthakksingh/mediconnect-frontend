@@ -49,6 +49,12 @@
         <a href="#" class="forgot">Forgot password?</a>
       </div>
       <button class="submit-btn" id="loginBtn" onclick="login()">Sign In</button>
+
+      <div style="text-align:center;margin:16px 0;color:#9ca3af;font-size:13px">or</div>
+      <button onclick="loginWithGoogle()" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:8px;background:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
+        <img src="https://www.google.com/favicon.ico" width="16"> Continue with Google
+      </button>
+
     </div>
 
     <!-- Register Form -->
@@ -88,5 +94,6 @@
 
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
+  <script type="module" src="js/firebase.js"></script>
 </body>
 </html>

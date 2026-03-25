@@ -546,21 +546,36 @@
   </div>
 </div>
 
-<script src="config.js"></script>
-<script src="utils.js"></script>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
 <script>
-  // Guard: only DOCTOR can access this page
-  initSidebar(['DOCTOR']);
+  // ── Auth guard (works with both old and new utils.js) ──
+  (function() {
+    const token = localStorage.getItem('token');
+    if (!token) { window.location.href = 'index.html'; return; }
+    const role = localStorage.getItem('user_role') || '';
+    if (role && role !== 'DOCTOR') {
+      window.location.href = 'dashboard.html';
+      return;
+    }
+  })();
+
+  // Populate sidebar footer (works regardless of utils.js version)
+  const _name = localStorage.getItem('user_name') || 'Doctor';
+  const _nameEl = document.getElementById('userName');
+  if (_nameEl) _nameEl.textContent = _name;
 
   const userName = localStorage.getItem('user_name') || 'Doctor';
-  document.getElementById('doctorNameHeader').textContent = userName;
-  document.getElementById('sidebarInitial').textContent = userName[0].toUpperCase();
+  const sidebarInitial = document.getElementById('sidebarInitial');
+  if (sidebarInitial) sidebarInitial.textContent = userName[0].toUpperCase();
 
   // Greeting
   const hour = new Date().getHours();
   const greet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-  document.getElementById('pageTitle').innerHTML = `${greet}, Dr. <span id="doctorNameHeader2">${userName}</span>`;
-  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', {
+  const pageTitleEl = document.getElementById('pageTitle');
+  if (pageTitleEl) pageTitleEl.textContent = `${greet}, Dr. ${userName}`;
+  const todayDateEl = document.getElementById('todayDate');
+  if (todayDateEl) todayDateEl.textContent = new Date().toLocaleDateString('en-IN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
@@ -581,11 +596,19 @@
     if (name === 'all') renderAllList(allAppointments);
   }
 
-  // ── Load dashboard summary ──────────────────────────
   async function loadDashboard() {
     try {
       const res = await fetch(`${API_BASE}/doctor/dashboard`, { headers: authHeaders() });
-      if (!res.ok) throw new Error();
+      if (res.status === 401) { logout(); return; }
+      if (res.status === 403) {
+        document.getElementById('todayList').innerHTML = `<div class="empty"><div class="empty-icon">🔒</div><div class="empty-title">Access denied</div><div class="empty-sub">Your account doesn't have doctor permissions. Contact admin.</div></div>`;
+        return;
+      }
+      if (res.status === 404) {
+        document.getElementById('todayList').innerHTML = `<div class="empty"><div class="empty-icon">⚙️</div><div class="empty-title">Doctor routes not deployed yet</div><div class="empty-sub">Push doctor_routes.py to your backend and restart the server.</div></div>`;
+        return;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       document.getElementById('statToday').textContent = data.today_appointments;
       document.getElementById('statPending').textContent = data.pending_requests;
@@ -596,14 +619,19 @@
         badge.textContent = data.pending_requests;
         badge.style.display = 'inline';
       }
-    } catch {}
+    } catch(e) {
+      console.error('Dashboard load failed:', e);
+      document.getElementById('statToday').textContent = '!';
+      document.getElementById('statPending').textContent = '!';
+      document.getElementById('statPatients').textContent = '!';
+    }
   }
 
   // ── Today's appointments ────────────────────────────
   async function loadToday() {
     try {
       const res = await fetch(`${API_BASE}/doctor/appointments/today`, { headers: authHeaders() });
-      if (!res.ok) throw new Error();
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const appts = await res.json();
       const list = document.getElementById('todayList');
 
@@ -613,8 +641,9 @@
       }
 
       list.innerHTML = appts.map(a => buildApptCard(a, true)).join('');
-    } catch {
-      document.getElementById('todayList').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-title">Could not load appointments</div></div>`;
+    } catch(e) {
+      console.error('loadToday failed:', e);
+      document.getElementById('todayList').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-title">Could not load appointments</div><div class="empty-sub">Check console for details. Backend may need redeployment.</div></div>`;
     }
   }
 

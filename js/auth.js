@@ -12,6 +12,16 @@ function showMsg(id, msg, type) {
   el.className = `msg ${type}`;
 }
 
+function redirectByRole(role) {
+  if (role === 'DOCTOR') {
+    window.location.href = 'doctor-dashboard.html';
+  } else if (role === 'ADMIN') {
+    window.location.href = 'admin-dashboard.html';
+  } else {
+    window.location.href = 'dashboard.html';
+  }
+}
+
 async function login() {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
@@ -44,7 +54,7 @@ async function login() {
     localStorage.setItem('user_name', data.name);
     localStorage.setItem('user_role', data.role);
 
-    window.location.href = 'dashboard.html';
+    redirectByRole(data.role);
 
   } catch (e) {
     showMsg('loginMsg', 'Could not connect to server. Please try again.', 'error');
@@ -59,7 +69,7 @@ async function register() {
   const phone = document.getElementById('regPhone').value.trim();
   const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
-  const role = document.getElementById('regRole').value;
+  const doctorCode = document.getElementById('regDoctorCode')?.value.trim() || '';
 
   if (!name || !email || !password) {
     showMsg('registerMsg', 'Please fill in all required fields.', 'error');
@@ -75,11 +85,14 @@ async function register() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Creating account...';
 
+  const body = { name, phone, email, password };
+  if (doctorCode) body.doctor_code = doctorCode;
+
   try {
     const res = await fetch(`${API_BASE}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, email, password, role })
+      body: JSON.stringify(body)
     });
 
     const data = await res.json();
@@ -89,7 +102,8 @@ async function register() {
       return;
     }
 
-    showMsg('registerMsg', 'Account created! Please sign in.', 'success');
+    const roleLabel = data.role === 'DOCTOR' ? 'Doctor account' : 'Account';
+    showMsg('registerMsg', `${roleLabel} created! Please sign in.`, 'success');
     setTimeout(() => switchTab('login'), 1500);
 
   } catch (e) {
@@ -98,6 +112,13 @@ async function register() {
     btn.disabled = false;
     btn.innerHTML = 'Create Account';
   }
+}
+
+// Toggle doctor code field visibility
+function toggleDoctorCode() {
+  const field = document.getElementById('doctorCodeField');
+  const checkbox = document.getElementById('isDoctorCheckbox');
+  if (field) field.style.display = checkbox.checked ? 'block' : 'none';
 }
 
 document.addEventListener('keydown', e => {

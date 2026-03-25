@@ -6,6 +6,111 @@
   <title>Profile | MediConnect Portal</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/profile.css">
+  <style>
+    /* ── Edit Modal ───────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 999;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+    .modal {
+      background: var(--card, #fff);
+      border: 1px solid var(--border, #e5e7eb);
+      border-radius: 16px;
+      padding: 28px 32px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(16px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text, #111);
+      margin-bottom: 20px;
+    }
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .modal-grid .full { grid-column: 1 / -1; }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted, #6b7280);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--border, #e5e7eb);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text, #111);
+      background: var(--bg, #f9fafb);
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--teal, #0d9488);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 22px;
+    }
+    .btn-cancel {
+      padding: 9px 20px;
+      border: 1px solid var(--border, #e5e7eb);
+      border-radius: 8px;
+      background: transparent;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text, #111);
+    }
+    .btn-save {
+      padding: 9px 20px;
+      border-radius: 8px;
+      background: var(--teal, #0d9488);
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
+    .save-msg {
+      font-size: 13px;
+      margin-top: 8px;
+      text-align: right;
+      min-height: 18px;
+    }
+    .save-msg.success { color: var(--teal, #0d9488); }
+    .save-msg.error   { color: #ef4444; }
+
+    /* ── Profile extra fields ─────────────── */
+    .detail-row .detail-val.empty { color: var(--muted, #9ca3af); font-style: italic; }
+  </style>
 </head>
 <body>
 
@@ -62,7 +167,7 @@
         <div class="detail-card">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div class="detail-title" style="margin-bottom:0;padding-bottom:0;border-bottom:none">Personal Information</div>
-            <button class="edit-btn">Edit Profile</button>
+            <button class="edit-btn" onclick="openEditModal()">Edit Profile</button>
           </div>
           <div style="border-bottom:1px solid var(--border);margin:14px 0"></div>
 
@@ -76,15 +181,23 @@
           </div>
           <div class="detail-row">
             <span class="detail-key">Phone</span>
-            <span class="detail-val">Not provided</span>
+            <span class="detail-val" id="detailPhone">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Gender</span>
+            <span class="detail-val" id="detailGender">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Date of Birth</span>
+            <span class="detail-val" id="detailDob">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Blood Group</span>
+            <span class="detail-val" id="detailBlood">—</span>
           </div>
           <div class="detail-row">
             <span class="detail-key">Role</span>
             <span class="detail-val" id="detailRole">—</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-key">Member Since</span>
-            <span class="detail-val">2024</span>
           </div>
         </div>
 
@@ -107,6 +220,55 @@
 
     </div>
   </main>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="editModalOverlay" onclick="closeOnBackdrop(event)">
+    <div class="modal">
+      <div class="modal-title">✏️ Edit Profile</div>
+      <div class="modal-grid">
+        <div class="form-group full">
+          <label>Full Name</label>
+          <input type="text" id="editName" placeholder="Your full name" />
+        </div>
+        <div class="form-group full">
+          <label>Phone</label>
+          <input type="tel" id="editPhone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="editGender">
+            <option value="">— Select —</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Blood Group</label>
+          <select id="editBlood">
+            <option value="">— Select —</option>
+            <option value="A+">A+</option>
+            <option value="A-">A−</option>
+            <option value="B+">B+</option>
+            <option value="B-">B−</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB−</option>
+            <option value="O+">O+</option>
+            <option value="O-">O−</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Date of Birth</label>
+          <input type="date" id="editDob" />
+        </div>
+      </div>
+      <div class="save-msg" id="saveMsg"></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+        <button class="btn-save" id="saveBtn" onclick="saveProfile()">Save Changes</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>

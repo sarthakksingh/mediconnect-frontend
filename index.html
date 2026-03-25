@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MediConnect Portal — Sign In</title>
   <link rel="stylesheet" href="css/login.css">
+  <style>
+    .doctor-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .doctor-toggle input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--teal, #2dd4bf);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .doctor-toggle-label {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    #doctorCodeField {
+      display: none;
+      margin-top: 10px;
+    }
+
+    #doctorCodeField input {
+      border-color: #fbbf24 !important;
+    }
+
+    #doctorCodeField input:focus {
+      outline-color: #fbbf24;
+      box-shadow: 0 0 0 3px rgba(251,191,36,0.15);
+    }
+
+    .doctor-code-hint {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  </style>
 </head>
 <body>
 
@@ -54,7 +100,6 @@
       <button onclick="loginWithGoogle()" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:8px;background:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
         <img src="https://www.google.com/favicon.ico" width="16"> Continue with Google
       </button>
-
     </div>
 
     <!-- Register Form -->
@@ -80,13 +125,19 @@
         <label>Password</label>
         <input type="password" id="regPassword" placeholder="Min. 8 characters">
       </div>
+
+      <!-- Doctor registration toggle -->
       <div class="form-group">
-        <label>I am a</label>
-        <select id="regRole">
-          <option value="PATIENT">Patient</option>
-          <option value="DOCTOR">Doctor</option>
-        </select>
+        <label class="doctor-toggle">
+          <input type="checkbox" id="isDoctorCheckbox" onchange="toggleDoctorCode()">
+          <span class="doctor-toggle-label">I'm a doctor registering with a hospital code</span>
+        </label>
+        <div id="doctorCodeField">
+          <input type="text" id="regDoctorCode" placeholder="Enter your hospital registration code">
+          <div class="doctor-code-hint">🔒 This code is provided by your hospital administration</div>
+        </div>
       </div>
+
       <button class="submit-btn" id="registerBtn" onclick="register()">Create Account</button>
     </div>
 

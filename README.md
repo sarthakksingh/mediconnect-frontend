@@ -1,87 +1,62 @@
-# 🖥️ MediConnect Frontend – Hospital Appointment System UI
+# 🎨 MediConnect 
+Live Link - https://mediconnect-frontend-seav.onrender.com
 
-## 📌 Overview
-
-MediConnect Frontend is a **lightweight, dashboard-style web interface** for an AI-assisted hospital appointment system. It allows patients to search doctors, book appointments, manage bookings, and view health-related information.
-
-The frontend is built using **pure HTML, CSS, and JavaScript**, ensuring fast performance, simplicity, and easy integration with the FastAPI backend.
+A lightweight, dashboard-style frontend for the MediConnect hospital system. Built using pure HTML, CSS, and JavaScript, focusing on performance, simplicity, and modular UI design.
 
 ---
 
 ## 🚀 Features
 
-### 🔐 Authentication
-
-* User login interface
-* Role-based flow (Patient-focused UI)
-* Local session handling (ready for backend JWT integration)
-
----
-
-### 📊 Dashboard
-
-* Overview cards:
-
-  * Your Appointments
-  * Your Reports
-  * Your Health Stats
-  * Your Medicines
-* Quick actions:
-
-  * Search Doctors
-  * Message Your Doctor
-* Recent activity tracking
+### 🔐 Authentication UI
+- Login interface
+- Role-based navigation (Patient, Doctor, Admin)
+- Ready for JWT integration
 
 ---
 
-### 🔍 Search Doctors
-
-* Search doctors by name, specialization, or keyword
-* Clean card-based UI
-* Displays:
-
-  * Doctor name
-  * Specialization
-  * Patients visited
-  * Availability status
-  * Available time slots
+### 📊 Patient Dashboard
+- Overview cards (Appointments, Reports, Health Stats, Medicines)
+- Search doctors by specialization/keyword
+- Book & reschedule appointments
+- Track past and upcoming bookings
+- View health score and medicines
+- Access reports
 
 ---
 
-### 📅 Book Appointment
-
-* Select doctor
-* Choose date and time slot
-* Add reason for visit
-* Confirm appointment flow
-
----
-
-### 📖 Bookings Management
-
-* View all appointments
-* Track appointment status
-* Ready for reschedule/cancel integration
+### 👨‍⚕️ Doctor Dashboard
+- View daily schedule
+- Accept/reject appointments
+- Access patient history
+- Assign medicines
+- Upload reports
 
 ---
 
-### 👤 Profile
+### 🛠️ Admin Dashboard
+- Manage users (patients & doctors)
+- Add/remove doctors
+- Monitor appointments
 
-* User information display
-* Basic account management UI
-* Extendable for medical history & preferences
+---
+
+## 🧱 Tech Stack
+
+- HTML5
+- CSS3 (modular styling)
+- Vanilla JavaScript (no frameworks)
 
 ---
 
-## 🏗️ Tech Stack
+## ⚡ Why No Framework?
 
-* **HTML5** – Structure
-* **CSS3** – Styling (modular files per screen)
-* **JavaScript (Vanilla)** – Logic & API handling
-
-No frameworks used → fast, simple, and easy to scale.
+- Faster load times
+- Better understanding of core JS
+- Full control over DOM and state handling
 
 ---
+
+
 
 ## 📂 Project Structure
 
@@ -158,19 +133,28 @@ Or use **Live Server** in VS Code.
 
 ---
 
-## 🔌 API Integration
+## ⚡ API Design
 
-The frontend communicates with the FastAPI backend using REST APIs.
-
-### Example Usage
-
-```js id="sqh3nq"
-fetch(`${API_BASE}/doctors`)
-  .then(res => res.json())
-  .then(data => console.log(data));
-```
+- RESTful architecture
+- Modular route handling
+- Scalable service layer
 
 ---
+
+## 📌 Future Improvements
+
+- JWT Authentication
+- Role-based middleware
+- WebSocket notifications
+- Rate limiting & security enhancements
+
+---
+
+## ▶️ Run Locally
+
+```bash
+uvicorn main:app --reload
+
 
 ## 🔄 Application Flow
 
@@ -186,29 +170,6 @@ fetch(`${API_BASE}/doctors`)
 
 ---
 
-## 📊 Development Status
-
-### ✅ Completed
-
-* Login UI
-* Dashboard UI
-* Search Doctors UI
-* Book Appointment UI
-* Bookings page
-* Profile page
-* Modular CSS & JS structure
-
----
-
-### 🚧 Pending / Future Work
-
-* Full backend API integration
-* JWT authentication handling
-* Real-time updates
-* UI improvements & responsiveness
-* Migration to React (optional)
-
----
 
 ## 🎯 Design Principles
 
@@ -249,6 +210,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
 
 ---
+
 
 ## 🏁 Summary
 
